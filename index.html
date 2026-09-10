@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>둘만의 달력</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#e9e4d3;
+    --surface:#fbf8f0;
+    --surface-2:#f2ecdb;
+    --ink:#332c22;
+    --ink-soft:#7a6e59;
+    --line:#d9d0b8;
+    --accent:#2f6f62;
+    --accent-ink:#f6fbf9;
+    --accent-soft:#dceae3;
+    --sunday:#b8503a;
+    --saturday:#3c6ea5;
+    --shadow: 0 1px 2px rgba(51,44,34,.06), 0 8px 20px -10px rgba(51,44,34,.25);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#201c16;
+      --surface:#2a2520;
+      --surface-2:#332c23;
+      --ink:#efe7d6;
+      --ink-soft:#b3a68d;
+      --line:#463d30;
+      --accent:#72c2b0;
+      --accent-ink:#172622;
+      --accent-soft:#25423c;
+      --sunday:#e28870;
+      --saturday:#82abd8;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 24px -12px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#201c16;
+    --surface:#2a2520;
+    --surface-2:#332c23;
+    --ink:#efe7d6;
+    --ink-soft:#b3a68d;
+    --line:#463d30;
+    --accent:#72c2b0;
+    --accent-ink:#172622;
+    --accent-soft:#25423c;
+    --sunday:#e28870;
+    --saturday:#82abd8;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 24px -12px rgba(0,0,0,.55);
+  }
+
+  *{ box-sizing:border-box; }
+  [hidden]{ display:none !important; }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+  html,body{ margin:0; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    padding: clamp(16px, 4vw, 40px) 16px 48px;
+    min-height:100vh;
+  }
+  .shell{
+    max-width: 640px;
+    margin: 0 auto;
+    display:flex;
+    flex-direction:column;
+    gap: 18px;
+  }
+
+  /* ---------- header ---------- */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .brand{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .brand-mark{
+    font-family:'Song Myung', ui-serif, Georgia, serif;
+    font-size: 1.15rem;
+    color:var(--accent);
+  }
+  .brand-sub{
+    font-size:.72rem;
+    color:var(--ink-soft);
+    letter-spacing:.06em;
+  }
+  .me-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:6px 12px 6px 6px;
+    cursor:pointer;
+    color:var(--ink);
+    font:inherit;
+    font-size:.85rem;
+    font-weight:500;
+    box-shadow:var(--shadow);
+  }
+  .me-chip:hover{ background:var(--surface-2); }
+  .dot{
+    width:20px; height:20px; border-radius:50%;
+    flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.65rem; font-weight:700; color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,.25);
+  }
+  .dot.sm{ width:9px; height:9px; }
+
+  /* ---------- d-day ---------- */
+  .dday-heading{
+    font-size:.72rem;
+    color:var(--ink-soft);
+    letter-spacing:.04em;
+    margin-bottom:6px;
+  }
+  .dday-strip{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:4px;
+  }
+  .dday-card{
+    flex:none;
+    min-width:112px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 12px;
+    box-shadow:var(--shadow);
+    text-align:left;
+    cursor:pointer;
+    display:flex; flex-direction:column; gap:2px;
+    font:inherit; color:inherit;
+  }
+  .dday-card:hover{ border-color:var(--accent); }
+  .dday-num{
+    font-family:'Song Myung', ui-serif, Georgia, serif;
+    font-size:1.3rem;
+    color:var(--accent);
+    font-variant-numeric:tabular-nums;
+  }
+  .dday-num.today{ color:var(--sunday); }
+  .dday-label{
+    font-size:.78rem; font-weight:600;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .dday-date{
+    font-size:.7rem;
+    color:var(--ink-soft);
+  }
+  .dday-add{
+    flex:none;
+    width:48px;
+    border:1px dashed var(--line);
+    border-radius:14px;
+    background:none;
+    color:var(--ink-soft);
+    font-size:1.4rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .dday-add:hover{ border-color:var(--accent); color:var(--accent); }
+  .checkbox-field{
+    display:flex; align-items:center; gap:7px;
+    font-size:.82rem;
+    color:var(--ink-soft);
+  }
+  .checkbox-field input{ width:16px; height:16px; }
+
+  /* ---------- month nav ---------- */
+  .month-card{
+    position:relative;
+    background:var(--surface);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding: 18px 16px 20px;
+  }
+  .month-card::before{
+    content:"";
+    position:absolute;
+    top:-10px; left:28px;
+    width:56px; height:20px;
+    background:var(--accent-soft);
+    opacity:.85;
+    transform:rotate(-3deg);
+    border-radius:2px;
+  }
+  .month-nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: clamp(10px,4vw,22px);
+    margin-bottom:14px;
+  }
+  .nav-btn{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    width:32px; height:32px;
+    border-radius:50%;
+    font-size:1rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-btn:hover{ background:var(--surface-2); color:var(--ink); }
+  h1.month-title{
+    font-family:'Song Myung', ui-serif, Georgia, serif;
+    font-weight:400;
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    margin:0;
+    text-align:center;
+    min-width: 9ch;
+    text-wrap:balance;
+  }
+  .today-btn{
+    display:block;
+    margin: 0 auto 14px;
+    background:none;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    font:inherit;
+    font-size:.75rem;
+    padding:4px 12px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .today-btn:hover{ background:var(--surface-2); }
+
+  .weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    margin-bottom:6px;
+  }
+  .weekdays span{
+    text-align:center;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    letter-spacing:.04em;
+  }
+  .weekdays span:first-child{ color:var(--sunday); }
+  .weekdays span:last-child{ color:var(--saturday); }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap: 5px;
+  }
+  .cell{
+    background:var(--surface-2);
+    border-radius:10px;
+    min-height: 74px;
+    padding: 6px 5px;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    cursor:pointer;
+    border:1px solid transparent;
+    text-align:left;
+    font:inherit;
+    color:inherit;
+    width:100%;
+  }
+  .cell:hover{ border-color:var(--line); }
+  .cell:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+  .cell.pad{ background:transparent; cursor:default; opacity:.4; }
+  .cell.pad:hover{ border-color:transparent; }
+  .cell-num{
+    font-size:.82rem;
+    font-variant-numeric: tabular-nums;
+    font-weight:500;
+  }
+  .cell.today .cell-num{
+    display:inline-flex;
+    align-items:center; justify-content:center;
+    width:20px; height:20px;
+    border-radius:50%;
+    background:var(--accent);
+    color:var(--accent-ink);
+  }
+  .cell.sun .cell-num{ color:var(--sunday); }
+  .cell.sat .cell-num{ color:var(--saturday); }
+  .cell.today.sun .cell-num, .cell.today.sat .cell-num{ color:var(--accent-ink); }
+
+  .pill{
+    display:flex; align-items:center; gap:4px;
+    font-size:.66rem;
+    line-height:1.3;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    color:var(--ink);
+  }
+  .pill-more{
+    font-size:.62rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- overlay / sheet ---------- */
+  .overlay{
+    position:fixed; inset:0;
+    background: rgba(30,26,20,.42);
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+    z-index:20;
+  }
+  .overlay[hidden]{ display:none; }
+  .sheet{
+    background:var(--surface);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    width:100%; max-width:400px;
+    max-height:86vh;
+    overflow-y:auto;
+    padding:20px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .sheet-head{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px;
+  }
+  .sheet-head h2{
+    font-family:'Song Myung', ui-serif, Georgia, serif;
+    font-weight:400;
+    font-size:1.2rem;
+    margin:0;
+  }
+  .icon-btn{
+    background:none; border:none; cursor:pointer;
+    color:var(--ink-soft);
+    width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    font-size:1.1rem;
+    flex:none;
+  }
+  .icon-btn:hover{ background:var(--surface-2); color:var(--ink); }
+
+  .event-row{
+    display:flex; align-items:flex-start; gap:9px;
+    padding:9px 8px;
+    border-radius:10px;
+  }
+  .event-row:hover{ background:var(--surface-2); }
+  .event-row .dot{ margin-top:3px; }
+  .event-main{ flex:1; min-width:0; }
+  .event-title{ font-weight:500; font-size:.92rem; word-break:break-word; }
+  .event-meta{ font-size:.74rem; color:var(--ink-soft); }
+  .event-actions{ display:flex; gap:2px; flex:none; }
+
+  .empty-note{ color:var(--ink-soft); font-size:.85rem; padding:6px 8px; }
+
+  .add-btn{
+    background:var(--accent-soft);
+    color:var(--accent);
+    border:1px dashed var(--accent);
+    border-radius:12px;
+    padding:10px;
+    font:inherit; font-weight:600; font-size:.85rem;
+    cursor:pointer;
+  }
+  .add-btn:hover{ filter:brightness(1.05); }
+
+  form.event-form{ display:flex; flex-direction:column; gap:10px; }
+  .field label{
+    display:block; font-size:.75rem; color:var(--ink-soft); margin-bottom:4px;
+  }
+  .field input[type="text"], .field input[type="time"], .field input[type="date"]{
+    width:100%;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:9px 10px;
+    font:inherit;
+    color:var(--ink);
+  }
+  .field input:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+  .who-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .who-chip{
+    display:flex; align-items:center; gap:6px;
+    border:1px solid var(--line);
+    background:var(--bg);
+    border-radius:999px;
+    padding:5px 10px 5px 6px;
+    font:inherit; font-size:.8rem;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .who-chip.active{ border-color:var(--accent); background:var(--accent-soft); font-weight:600; }
+  .form-actions{ display:flex; gap:8px; margin-top:2px; }
+  .btn{
+    flex:1;
+    border-radius:10px;
+    padding:10px;
+    font:inherit; font-weight:600; font-size:.85rem;
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+    color:var(--ink);
+  }
+  .btn.primary{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .btn.danger{ background:transparent; color:var(--sunday); border-color:var(--sunday); }
+  .btn:hover{ filter:brightness(1.04); }
+  .btn:disabled{ opacity:.6; cursor:default; }
+
+  /* ---------- identity screen ---------- */
+  .id-screen{
+    position:fixed; inset:0;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+    z-index:30;
+  }
+  .id-screen[hidden]{ display:none; }
+  .id-card{
+    background:var(--surface);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    max-width:380px; width:100%;
+    padding:28px 24px;
+    text-align:center;
+  }
+  .id-card h1{
+    font-family:'Song Myung', ui-serif, Georgia, serif;
+    font-weight:400;
+    font-size:1.7rem;
+    margin:0 0 6px;
+  }
+  .id-card p.lead{
+    color:var(--ink-soft);
+    font-size:.85rem;
+    margin:0 0 20px;
+  }
+  .people-list{
+    display:flex; flex-direction:column; gap:8px;
+    margin-bottom:16px;
+  }
+  .person-row{
+    display:flex; align-items:stretch; gap:6px;
+  }
+  .person-opt{
+    flex:1;
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line);
+    background:var(--bg);
+    border-radius:12px;
+    padding:10px 12px;
+    font:inherit; font-size:.95rem; font-weight:500;
+    cursor:pointer;
+    color:var(--ink);
+    text-align:left;
+    min-width:0;
+  }
+  .person-opt span:last-child{
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .person-opt:hover{ border-color:var(--accent); }
+  .del-person-btn{
+    flex:none;
+    width:40px;
+    border:1px solid var(--line);
+    background:var(--bg);
+    border-radius:12px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    font-size:.95rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .del-person-btn:hover{ border-color:var(--sunday); color:var(--sunday); }
+  .confirm-row{
+    border:1px solid var(--sunday);
+    background:var(--bg);
+    border-radius:12px;
+    padding:10px 12px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .confirm-row p{
+    margin:0; font-size:.83rem; color:var(--ink);
+    text-align:left;
+  }
+  .confirm-row .form-actions{ margin-top:0; }
+  .divider{
+    display:flex; align-items:center; gap:10px;
+    color:var(--ink-soft); font-size:.72rem;
+    margin: 4px 0 14px;
+  }
+  .divider::before, .divider::after{
+    content:""; flex:1; height:1px; background:var(--line);
+  }
+  .swatches{
+    display:flex; flex-wrap:wrap; gap:7px;
+    justify-content:center;
+    margin: 10px 0 16px;
+  }
+  .swatch{
+    width:26px; height:26px; border-radius:50%;
+    border:2px solid transparent;
+    cursor:pointer;
+    padding:0;
+  }
+  .swatch.selected{ border-color:var(--ink); }
+  .text-btn{
+    background:none; border:none; cursor:pointer;
+    color:var(--ink-soft);
+    font:inherit; font-size:.8rem;
+    text-decoration:underline;
+    padding:4px;
+  }
+  .text-btn:hover{ color:var(--ink); }
+  .sync-banner{
+    font-size:.75rem;
+    color:var(--ink-soft);
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:8px 12px;
+    text-align:center;
+  }
+  .sync-banner.error{ color:var(--sunday); border-color:var(--sunday); }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <div class="sync-banner" id="syncBanner" hidden></div>
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-mark">둘만의 달력</span>
+      <span class="brand-sub">SHARED</span>
+    </div>
+    <button class="me-chip" id="meChip" type="button">
+      <span class="dot" id="meDot"></span>
+      <span id="meName">···</span>
+    </button>
+  </div>
+
+  <div>
+    <div class="dday-heading">디데이</div>
+    <div class="dday-strip" id="ddayStrip"></div>
+  </div>
+
+  <div class="month-card">
+    <div class="month-nav">
+      <button class="nav-btn" id="prevMonth" type="button" aria-label="이전 달">‹</button>
+      <h1 class="month-title" id="monthTitle">&nbsp;</h1>
+      <button class="nav-btn" id="nextMonth" type="button" aria-label="다음 달">›</button>
+    </div>
+    <button class="today-btn" id="todayBtn" type="button">오늘로 가기</button>
+    <div class="weekdays">
+      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<div class="overlay" id="dayOverlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dayTitle">
+    <div class="sheet-head">
+      <h2 id="dayTitle">&nbsp;</h2>
+      <button class="icon-btn" id="closeDay" type="button" aria-label="닫기">✕</button>
+    </div>
+    <div id="eventList"></div>
+    <button class="add-btn" id="showAddForm" type="button">+ 일정 추가</button>
+    <form class="event-form" id="eventForm" hidden>
+      <div class="field">
+        <label for="evTitle">일정</label>
+        <input type="text" id="evTitle" maxlength="80" required placeholder="예: 병원 예약, 장보기">
+      </div>
+      <div class="field">
+        <label for="evTime">시간 (선택)</label>
+        <input type="time" id="evTime">
+      </div>
+      <div class="field">
+        <label>누구 일정인가요</label>
+        <div class="who-row" id="whoRow"></div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn danger" id="deleteEvBtn" hidden>삭제</button>
+        <button type="button" class="btn" id="cancelEvBtn">취소</button>
+        <button type="submit" class="btn primary" id="saveEvBtn">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="overlay" id="ddayOverlay" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ddayFormTitle">
+    <div class="sheet-head">
+      <h2 id="ddayFormTitle">디데이</h2>
+      <button class="icon-btn" id="closeDday" type="button" aria-label="닫기">✕</button>
+    </div>
+    <form class="event-form" id="ddayForm">
+      <div class="field">
+        <label for="ddayName">이름</label>
+        <input type="text" id="ddayName" maxlength="40" required placeholder="예: 결혼기념일, 생일">
+      </div>
+      <div class="field">
+        <label for="ddayDate">날짜</label>
+        <input type="date" id="ddayDate" required>
+      </div>
+      <label class="checkbox-field" for="ddayRepeat">
+        <input type="checkbox" id="ddayRepeat">
+        매년 반복 (생일·기념일)
+      </label>
+      <div class="form-actions">
+        <button type="button" class="btn danger" id="deleteDdayBtn" hidden>삭제</button>
+        <button type="button" class="btn" id="cancelDdayBtn">취소</button>
+        <button type="submit" class="btn primary" id="saveDdayBtn">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="id-screen" id="idScreen">
+  <div class="id-card">
+    <h1>둘만의 달력</h1>
+    <p class="lead" id="idLead">불러오는 중...</p>
+    <div class="people-list" id="peopleList"></div>
+    <div class="divider" id="addDivider" hidden>새로운 사람</div>
+    <div id="addPersonBlock" hidden>
+      <div class="field" style="text-align:left">
+        <label for="newName">이름</label>
+        <input type="text" id="newName" maxlength="20" placeholder="예: 아내, 준호">
+      </div>
+      <p class="lead" style="margin:12px 0 4px">나를 나타낼 색</p>
+      <div class="swatches" id="colorSwatches"></div>
+      <button class="btn primary" id="startBtn" type="button" style="width:100%">시작하기</button>
+    </div>
+    <button class="text-btn" id="closeIdScreen" type="button" hidden style="margin-top:6px">닫기</button>
+  </div>
+</div>
+
+<!--
+  ============================================================
+  Firebase 설정 — 아래 firebaseConfig 값을 본인의 Firebase 프로젝트
+  값으로 바꿔주세요. (Firebase 콘솔 > 프로젝트 설정 > 내 앱 > SDK 설정)
+  자세한 설정 순서는 대화창 답변을 참고하세요.
+  ============================================================
+-->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyArdfjsMiPlzCSzFOFywk8m59v9XEtjTac",
+    authDomain: "calendar-9acfc.firebaseapp.com",
+    projectId: "calendar-9acfc",
+    storageBucket: "calendar-9acfc.firebasestorage.app",
+    messagingSenderId: "307444687883",
+    appId: "1:307444687883:web:ce4263087afa26c426d30e"
+  };
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+  var auth = firebase.auth();
+
+  var PALETTE = ['#d9695a','#3f8f7a','#c99a3e','#5f79b8','#9c5fa0','#4fa0a6','#b4784b','#7a8c4e'];
+
+  var state = {
+    people: [],
+    events: [],
+    ddays: [],
+    myId: localStorage.getItem('dc_myPersonId') || null,
+    current: startOfMonth(new Date()),
+    selectedDate: null,
+    selectedColor: PALETTE[0],
+    editingEventId: null,
+    editingDdayId: null,
+    identityForced: false,
+    confirmDeleteId: null,
+    peopleLoaded: false
+  };
+
+  // ---------- date helpers ----------
+  function startOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+  function pad2(n){ return n < 10 ? '0'+n : ''+n; }
+  function dateKey(d){ return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate()); }
+  function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+  var WD = ['일','월','화','수','목','금','토'];
+
+  function parseDateStr(s){ var p = s.split('-').map(Number); return new Date(p[0], p[1]-1, p[2]); }
+  function todayMidnight(){ var t = new Date(); return new Date(t.getFullYear(), t.getMonth(), t.getDate()); }
+  function nextOccurrence(dateStr, repeatYearly){
+    var d = parseDateStr(dateStr);
+    if (!repeatYearly) return d;
+    var t = todayMidnight();
+    var occ = new Date(t.getFullYear(), d.getMonth(), d.getDate());
+    if (occ < t) occ = new Date(t.getFullYear() + 1, d.getMonth(), d.getDate());
+    return occ;
+  }
+  function ddayDiff(dd){
+    var occ = nextOccurrence(dd.date, dd.repeatYearly);
+    return Math.round((occ - todayMidnight()) / 86400000);
+  }
+
+  // ---------- element refs ----------
+  var els = {};
+  ['grid','monthTitle','meChip','meDot','meName','prevMonth','nextMonth','todayBtn',
+   'dayOverlay','dayTitle','closeDay','eventList','showAddForm','eventForm',
+   'evTitle','evTime','whoRow','deleteEvBtn','cancelEvBtn','saveEvBtn',
+   'idScreen','idLead','peopleList','addDivider','addPersonBlock','newName',
+   'colorSwatches','startBtn','closeIdScreen','syncBanner',
+   'ddayStrip','ddayOverlay','closeDday','ddayForm','ddayName','ddayDate','ddayRepeat',
+   'deleteDdayBtn','cancelDdayBtn'
+  ].forEach(function(id){ els[id] = document.getElementById(id); });
+
+  function personById(id){
+    for (var i=0;i<state.people.length;i++) if (state.people[i].id===id) return state.people[i];
+    return null;
+  }
+
+  // ---------- rendering ----------
+  function renderMeChip(){
+    var me = personById(state.myId);
+    if (me){
+      els.meDot.style.background = me.color;
+      els.meDot.textContent = me.name.slice(0,1);
+      els.meName.textContent = me.name;
+    } else {
+      els.meDot.style.background = 'var(--line)';
+      els.meDot.textContent = '';
+      els.meName.textContent = '나는 누구?';
+    }
+  }
+
+  function renderMonthTitle(){
+    els.monthTitle.textContent = state.current.getFullYear() + '년 ' + (state.current.getMonth()+1) + '월';
+  }
+
+  function eventsOn(key){
+    return state.events.filter(function(e){ return e.date === key; })
+      .sort(function(a,b){
+        var at = a.time || '99:99', bt = b.time || '99:99';
+        return at < bt ? -1 : at > bt ? 1 : 0;
+      });
+  }
+
+  function renderGrid(){
+    els.grid.innerHTML = '';
+    var year = state.current.getFullYear(), month = state.current.getMonth();
+    var firstWeekday = new Date(year, month, 1).getDay();
+    var daysInMonth = new Date(year, month+1, 0).getDate();
+    var totalCells = Math.ceil((firstWeekday + daysInMonth) / 7) * 7;
+    var today = new Date();
+
+    for (var i=0; i<totalCells; i++){
+      var dayNum = i - firstWeekday + 1;
+      var inMonth = dayNum >= 1 && dayNum <= daysInMonth;
+      var col = i % 7;
+
+      if (!inMonth){
+        var pad = document.createElement('div');
+        pad.className = 'cell pad';
+        var padDate = new Date(year, month, dayNum);
+        var num = document.createElement('span');
+        num.className = 'cell-num';
+        num.textContent = padDate.getDate();
+        pad.appendChild(num);
+        els.grid.appendChild(pad);
+        continue;
+      }
+
+      var cellDate = new Date(year, month, dayNum);
+      var key = dateKey(cellDate);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cell' + (sameDay(cellDate, today) ? ' today' : '') + (col===0 ? ' sun' : col===6 ? ' sat' : '');
+      var numSpan = document.createElement('span');
+      numSpan.className = 'cell-num';
+      numSpan.textContent = dayNum;
+      btn.appendChild(numSpan);
+
+      var dayEvents = eventsOn(key);
+      dayEvents.slice(0,2).forEach(function(ev){
+        var pill = document.createElement('span');
+        pill.className = 'pill';
+        var d = document.createElement('span');
+        d.className = 'dot sm';
+        d.style.background = ev.personColor || 'var(--accent)';
+        pill.appendChild(d);
+        var t = document.createElement('span');
+        t.textContent = ev.title;
+        pill.appendChild(t);
+        btn.appendChild(pill);
+      });
+      if (dayEvents.length > 2){
+        var more = document.createElement('span');
+        more.className = 'pill-more';
+        more.textContent = '+' + (dayEvents.length - 2) + '개 더';
+        btn.appendChild(more);
+      }
+
+      btn.addEventListener('click', function(k){ return function(){ openDay(k); }; }(key));
+      els.grid.appendChild(btn);
+    }
+  }
+
+  function renderDdayStrip(){
+    els.ddayStrip.innerHTML = '';
+    var sorted = state.ddays.slice().sort(function(a,b){ return ddayDiff(a) - ddayDiff(b); });
+    sorted.forEach(function(dd){
+      var diff = ddayDiff(dd);
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'dday-card';
+
+      var num = document.createElement('span');
+      num.className = 'dday-num' + (diff === 0 ? ' today' : '');
+      num.textContent = diff === 0 ? 'D-DAY' : diff > 0 ? ('D-' + diff) : ('D+' + Math.abs(diff));
+      card.appendChild(num);
+
+      var label = document.createElement('span');
+      label.className = 'dday-label';
+      label.textContent = dd.title;
+      card.appendChild(label);
+
+      var occ = nextOccurrence(dd.date, dd.repeatYearly);
+      var dateSpan = document.createElement('span');
+      dateSpan.className = 'dday-date';
+      dateSpan.textContent = (occ.getMonth()+1) + '월 ' + occ.getDate() + '일' + (dd.repeatYearly ? ' · 매년' : '');
+      card.appendChild(dateSpan);
+
+      card.addEventListener('click', function(){ openDdayForm(dd); });
+      els.ddayStrip.appendChild(card);
+    });
+
+    var addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'dday-add';
+    addBtn.setAttribute('aria-label', '디데이 추가');
+    addBtn.textContent = '+';
+    addBtn.addEventListener('click', function(){ openDdayForm(null); });
+    els.ddayStrip.appendChild(addBtn);
+  }
+
+  function renderAll(){
+    renderMeChip();
+    renderMonthTitle();
+    renderGrid();
+    renderDdayStrip();
+  }
+
+  // ---------- day sheet ----------
+  function openDay(key){
+    state.selectedDate = key;
+    var parts = key.split('-').map(Number);
+    var d = new Date(parts[0], parts[1]-1, parts[2]);
+    els.dayTitle.textContent = (parts[1]) + '월 ' + parts[2] + '일 ' + WD[d.getDay()] + '요일';
+    renderEventList();
+    hideForm();
+    els.dayOverlay.hidden = false;
+  }
+  function closeDay(){
+    els.dayOverlay.hidden = true;
+    state.selectedDate = null;
+  }
+  els.closeDay.addEventListener('click', closeDay);
+  els.dayOverlay.addEventListener('click', function(e){ if (e.target === els.dayOverlay) closeDay(); });
+
+  function renderEventList(){
+    els.eventList.innerHTML = '';
+    var list = eventsOn(state.selectedDate);
+    if (!list.length){
+      var empty = document.createElement('p');
+      empty.className = 'empty-note';
+      empty.textContent = '아직 등록된 일정이 없어요.';
+      els.eventList.appendChild(empty);
+      return;
+    }
+    list.forEach(function(ev){
+      var row = document.createElement('div');
+      row.className = 'event-row';
+
+      var dot = document.createElement('span');
+      dot.className = 'dot';
+      dot.style.background = ev.personColor || 'var(--accent)';
+      dot.textContent = (ev.personName||'?').slice(0,1);
+      row.appendChild(dot);
+
+      var main = document.createElement('div');
+      main.className = 'event-main';
+      var title = document.createElement('div');
+      title.className = 'event-title';
+      title.textContent = ev.title;
+      var meta = document.createElement('div');
+      meta.className = 'event-meta';
+      meta.textContent = (ev.time ? ev.time + ' · ' : '') + (ev.personName || '');
+      main.appendChild(title);
+      main.appendChild(meta);
+      row.appendChild(main);
+
+      var actions = document.createElement('div');
+      actions.className = 'event-actions';
+      var editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'icon-btn';
+      editBtn.setAttribute('aria-label','수정');
+      editBtn.textContent = '✎';
+      editBtn.addEventListener('click', function(){ showForm(ev); });
+      actions.appendChild(editBtn);
+      row.appendChild(actions);
+
+      els.eventList.appendChild(row);
+    });
+  }
+
+  function hideForm(){
+    els.eventForm.hidden = true;
+    els.showAddForm.hidden = false;
+    state.editingEventId = null;
+  }
+
+  function showForm(existing){
+    els.showAddForm.hidden = true;
+    els.eventForm.hidden = false;
+    els.whoRow.innerHTML = '';
+    var chooseId = existing ? existing.personId : state.myId;
+    state.people.forEach(function(p){
+      var chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'who-chip' + (p.id === chooseId ? ' active' : '');
+      chip.dataset.id = p.id;
+      var d = document.createElement('span');
+      d.className = 'dot sm';
+      d.style.background = p.color;
+      chip.appendChild(d);
+      var t = document.createElement('span');
+      t.textContent = p.name;
+      chip.appendChild(t);
+      chip.addEventListener('click', function(){
+        Array.prototype.forEach.call(els.whoRow.children, function(c){ c.classList.remove('active'); });
+        chip.classList.add('active');
+      });
+      els.whoRow.appendChild(chip);
+    });
+
+    if (existing){
+      state.editingEventId = existing.id;
+      els.evTitle.value = existing.title;
+      els.evTime.value = existing.time || '';
+      els.deleteEvBtn.hidden = false;
+    } else {
+      state.editingEventId = null;
+      els.evTitle.value = '';
+      els.evTime.value = '';
+      els.deleteEvBtn.hidden = true;
+    }
+    els.evTitle.focus();
+  }
+
+  els.showAddForm.addEventListener('click', function(){ showForm(null); });
+  els.cancelEvBtn.addEventListener('click', hideForm);
+
+  els.deleteEvBtn.addEventListener('click', function(){
+    if (state.editingEventId) removeEvent(state.editingEventId).catch(reportError);
+    hideForm();
+  });
+
+  els.eventForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var title = els.evTitle.value.trim();
+    if (!title) return;
+    var activeChip = els.whoRow.querySelector('.who-chip.active');
+    var personId = activeChip ? activeChip.dataset.id : state.myId;
+    var person = personById(personId);
+    var payload = {
+      date: state.selectedDate,
+      title: title,
+      time: els.evTime.value || null,
+      personId: personId,
+      personName: person ? person.name : '',
+      personColor: person ? person.color : '#999999'
+    };
+    var op = state.editingEventId ? updateEvent(state.editingEventId, payload) : addEvent(payload);
+    op.catch(reportError);
+    hideForm();
+  });
+
+  // ---------- month nav ----------
+  els.prevMonth.addEventListener('click', function(){
+    state.current = new Date(state.current.getFullYear(), state.current.getMonth()-1, 1);
+    renderAll();
+  });
+  els.nextMonth.addEventListener('click', function(){
+    state.current = new Date(state.current.getFullYear(), state.current.getMonth()+1, 1);
+    renderAll();
+  });
+  els.todayBtn.addEventListener('click', function(){
+    state.current = startOfMonth(new Date());
+    renderAll();
+  });
+
+  // ---------- d-day form ----------
+  function openDdayForm(existing){
+    state.editingDdayId = existing ? existing.id : null;
+    els.ddayName.value = existing ? existing.title : '';
+    els.ddayDate.value = existing ? existing.date : '';
+    els.ddayRepeat.checked = existing ? !!existing.repeatYearly : false;
+    els.deleteDdayBtn.hidden = !existing;
+    els.ddayOverlay.hidden = false;
+    els.ddayName.focus();
+  }
+  function closeDdayForm(){
+    els.ddayOverlay.hidden = true;
+    state.editingDdayId = null;
+  }
+  els.closeDday.addEventListener('click', closeDdayForm);
+  els.cancelDdayBtn.addEventListener('click', closeDdayForm);
+  els.ddayOverlay.addEventListener('click', function(e){ if (e.target === els.ddayOverlay) closeDdayForm(); });
+  els.deleteDdayBtn.addEventListener('click', function(){
+    if (state.editingDdayId) removeDday(state.editingDdayId).catch(reportError);
+    closeDdayForm();
+  });
+  els.ddayForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var title = els.ddayName.value.trim();
+    var date = els.ddayDate.value;
+    if (!title || !date) return;
+    var payload = { title: title, date: date, repeatYearly: els.ddayRepeat.checked };
+    var op = state.editingDdayId ? updateDday(state.editingDdayId, payload) : addDday(payload);
+    op.catch(reportError);
+    closeDdayForm();
+  });
+
+  // ---------- identity screen ----------
+  function renderColorSwatches(){
+    els.colorSwatches.innerHTML = '';
+    PALETTE.forEach(function(c){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'swatch' + (c === state.selectedColor ? ' selected' : '');
+      b.style.background = c;
+      b.setAttribute('aria-label', c);
+      b.addEventListener('click', function(){
+        state.selectedColor = c;
+        renderColorSwatches();
+      });
+      els.colorSwatches.appendChild(b);
+    });
+  }
+
+  function renderIdentityScreen(){
+    if (!state.people.length){
+      els.idLead.textContent = state.peopleLoaded
+        ? '아직 등록된 사람이 없어요. 첫 번째 사람을 추가해 주세요.'
+        : '불러오는 중...';
+      els.peopleList.innerHTML = '';
+      els.addDivider.hidden = true;
+    } else {
+      els.idLead.textContent = '당신은 누구인가요?';
+      els.peopleList.innerHTML = '';
+      state.people.forEach(function(p){
+        if (state.confirmDeleteId === p.id){
+          var confirmRow = document.createElement('div');
+          confirmRow.className = 'confirm-row';
+          var msg = document.createElement('p');
+          msg.textContent = p.name + '님을 삭제할까요? 이미 등록된 일정 기록은 그대로 남아있어요.';
+          confirmRow.appendChild(msg);
+          var actions = document.createElement('div');
+          actions.className = 'form-actions';
+          var cancelBtn = document.createElement('button');
+          cancelBtn.type = 'button';
+          cancelBtn.className = 'btn';
+          cancelBtn.textContent = '취소';
+          cancelBtn.addEventListener('click', function(){
+            state.confirmDeleteId = null;
+            renderIdentityScreen();
+          });
+          var confirmBtn = document.createElement('button');
+          confirmBtn.type = 'button';
+          confirmBtn.className = 'btn danger';
+          confirmBtn.textContent = '삭제';
+          confirmBtn.addEventListener('click', function(){ removePerson(p.id).catch(reportError); });
+          actions.appendChild(cancelBtn);
+          actions.appendChild(confirmBtn);
+          confirmRow.appendChild(actions);
+          els.peopleList.appendChild(confirmRow);
+          return;
+        }
+
+        var row = document.createElement('div');
+        row.className = 'person-row';
+
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'person-opt';
+        var d = document.createElement('span');
+        d.className = 'dot';
+        d.style.background = p.color;
+        d.textContent = p.name.slice(0,1);
+        b.appendChild(d);
+        var t = document.createElement('span');
+        t.textContent = p.name;
+        b.appendChild(t);
+        b.addEventListener('click', function(){ chooseIdentity(p.id); });
+        row.appendChild(b);
+
+        var delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'del-person-btn';
+        delBtn.setAttribute('aria-label', p.name + ' 삭제');
+        delBtn.textContent = '🗑';
+        delBtn.addEventListener('click', function(){
+          state.confirmDeleteId = p.id;
+          renderIdentityScreen();
+        });
+        row.appendChild(delBtn);
+
+        els.peopleList.appendChild(row);
+      });
+      els.addDivider.hidden = false;
+    }
+    els.addPersonBlock.hidden = false;
+    els.closeIdScreen.hidden = state.identityForced;
+    renderColorSwatches();
+  }
+
+  function chooseIdentity(id){
+    state.myId = id;
+    localStorage.setItem('dc_myPersonId', id);
+    els.idScreen.hidden = true;
+    renderAll();
+  }
+
+  els.startBtn.addEventListener('click', function(){
+    var name = els.newName.value.trim();
+    if (!name) { els.newName.focus(); return; }
+    els.startBtn.disabled = true;
+    addPerson({ name: name, color: state.selectedColor })
+      .then(function(ref){
+        els.newName.value = '';
+        chooseIdentity(ref.id);
+      })
+      .catch(reportError)
+      .then(function(){ els.startBtn.disabled = false; });
+  });
+
+  els.meChip.addEventListener('click', function(){
+    state.identityForced = false;
+    renderIdentityScreen();
+    els.idScreen.hidden = false;
+  });
+  els.closeIdScreen.addEventListener('click', function(){
+    els.idScreen.hidden = true;
+  });
+
+  function maybeShowIdentityScreen(){
+    var me = personById(state.myId);
+    if (me){
+      els.idScreen.hidden = true;
+      return;
+    }
+    state.identityForced = true;
+    renderIdentityScreen();
+    els.idScreen.hidden = false;
+  }
+
+  // ---------- data layer: Firestore ----------
+  function showSyncBanner(msg, isError){
+    els.syncBanner.textContent = msg;
+    els.syncBanner.className = 'sync-banner' + (isError ? ' error' : '');
+    els.syncBanner.hidden = false;
+  }
+  function reportError(err){
+    showSyncBanner('문제가 발생했어요: ' + (err && err.message ? err.message : err), true);
+  }
+
+  function addPerson(data){
+    return db.collection('people').add(Object.assign({ createdAt: Date.now() }, data));
+  }
+  function removePerson(id){
+    state.confirmDeleteId = null;
+    if (state.myId === id){
+      state.myId = null;
+      localStorage.removeItem('dc_myPersonId');
+    }
+    return db.collection('people').doc(id).delete();
+  }
+  function addEvent(data){
+    return db.collection('events').add(Object.assign({ createdAt: Date.now() }, data));
+  }
+  function updateEvent(id, data){
+    return db.collection('events').doc(id).update(data);
+  }
+  function removeEvent(id){
+    return db.collection('events').doc(id).delete();
+  }
+  function addDday(data){
+    return db.collection('ddays').add(Object.assign({ createdAt: Date.now() }, data));
+  }
+  function updateDday(id, data){
+    return db.collection('ddays').doc(id).update(data);
+  }
+  function removeDday(id){
+    return db.collection('ddays').doc(id).delete();
+  }
+
+  // ---------- boot ----------
+  function boot(){
+    renderMonthTitle();
+
+    auth.signInAnonymously().catch(function(err){
+      reportError(err);
+    });
+
+    auth.onAuthStateChanged(function(user){
+      if (!user) return;
+
+      db.collection('people').onSnapshot(function(snap){
+        state.people = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+        state.peopleLoaded = true;
+        renderAll();
+        maybeShowIdentityScreen();
+        if (!els.idScreen.hidden) renderIdentityScreen();
+      }, reportError);
+
+      db.collection('events').onSnapshot(function(snap){
+        state.events = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+        renderGrid();
+        if (!els.dayOverlay.hidden) renderEventList();
+      }, reportError);
+
+      db.collection('ddays').onSnapshot(function(snap){
+        state.ddays = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
+        renderDdayStrip();
+      }, reportError);
+    });
+  }
+
+  boot();
+})();
+</script>
+</body>
+</html>
