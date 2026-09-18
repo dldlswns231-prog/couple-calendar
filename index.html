@@ -402,12 +402,14 @@
     border:1px solid var(--line);
     background:var(--bg);
     border-radius:999px;
-    padding:5px 10px 5px 6px;
+    padding:6px 10px;
     font:inherit; font-size:.8rem;
     cursor:pointer;
     color:var(--ink);
+    transition:all 0.15s ease-in-out;
   }
-  .who-chip.active{ border-color:var(--accent); background:var(--accent-soft); font-weight:600; }
+  .who-chip:hover{ border-color:var(--accent); }
+  .who-chip.active{ border-color:var(--accent); background:var(--accent-soft); font-weight:600; color:var(--accent-ink); }
   .form-actions{ display:flex; gap:8px; margin-top:2px; }
   .btn{
     flex:1;
@@ -476,6 +478,7 @@
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .person-opt:hover{ border-color:var(--accent); }
+  .person-opt.active{ border-color:var(--accent); background:var(--accent-soft); font-weight:600; }
   .del-person-btn{
     flex:none;
     width:40px;
@@ -518,8 +521,11 @@
     border:2px solid transparent;
     cursor:pointer;
     padding:0;
+    transition:all 0.15s ease-in-out;
+    box-shadow:0 0 0 0 transparent;
   }
-  .swatch.selected{ border-color:var(--ink); }
+  .swatch:hover{ transform:scale(1.1); }
+  .swatch.selected{ border-color:var(--ink); box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--ink); transform:scale(1.15); }
   .text-btn{
     background:none; border:none; cursor:pointer;
     color:var(--ink-soft);
@@ -1110,7 +1116,7 @@
 
         var b = document.createElement('button');
         b.type = 'button';
-        b.className = 'person-opt';
+        b.className = 'person-opt' + (p.id === state.myId ? ' active' : '');
         var d = document.createElement('span');
         d.className = 'dot';
         d.style.background = p.color;
