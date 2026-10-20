@@ -54,8 +54,8 @@
 <rect x="240" y="150" width="60" height="22" rx="4" fill="#9aa5b1" stroke="#6f7b88" stroke-width="2"/>
 <rect x="248" y="172" width="44" height="8" fill="#333"/>
 <rect x="235" y="180" width="70" height="25" rx="3" fill="#d7dde3" stroke="#8a97a3" stroke-width="2"/>
-<ellipse cx="270" cy="208" rx="16" ry="3" fill="none" stroke="#333" stroke-width="2"/>
-<rect x="255" y="210" width="30" height="112" rx="4" fill="#fff" stroke="#6f8196" stroke-width="2.5"/>
+<ellipse cx="270" cy="208" rx="10" ry="3" fill="none" stroke="#333" stroke-width="2"/>
+<rect x="263" y="210" width="14" height="112" rx="3" fill="#fff" stroke="#6f8196" stroke-width="2.5"/>
 <ellipse cx="270" cy="334" rx="17" ry="5" fill="#e0b341" stroke="#a37d12" stroke-width="2"/>
 <rect x="257" y="342" width="26" height="30" fill="#c9ced3" stroke="#8a97a3" stroke-width="2"/>
 <rect x="263" y="376" width="14" height="24" fill="#b0b6bc" stroke="#7d848b" stroke-width="2"/>
@@ -63,7 +63,7 @@
 <g font-size="11" fill="#445">
  <text x="340" y="164">Septum retainer nut · Septum</text>
  <text x="340" y="196">Insert assembly (septum seat)</text>
- <text x="340" y="262">Liner (기화실, O-ring 밀봉)</text>
+ <text x="340" y="262">Headspace용 Liner (내경 좁은 직선형)</text>
  <text x="340" y="347">Gold seal · Retaining nut</text>
  <text x="340" y="362">Reducing nut · 단열재(Insulation cup)</text>
  <text x="340" y="392">Ferrule · Column nut → 컬럼 연결</text>
