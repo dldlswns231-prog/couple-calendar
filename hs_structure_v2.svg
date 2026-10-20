@@ -13,7 +13,7 @@
  <rect x="670" y="64" width="86" height="22" rx="11" fill="#d9534f"/><text x="713" y="80" fill="#fff" text-anchor="middle" font-size="12">Empower 값</text>
 </g>
 <rect x="830" y="22" width="410" height="52" rx="8" fill="#fff0f0" stroke="#ffcccc"/>
-<text x="1035" y="42" text-anchor="middle" font-size="13" fill="#d9534f" font-weight="bold">온도 순서 (슬라이드 10)</text>
+<text x="1035" y="42" text-anchor="middle" font-size="13" fill="#d9534f" font-weight="bold">온도 순서</text>
 <text x="1035" y="62" text-anchor="middle" font-size="15" fill="#222">Oven ≤ Loop/Valve ≤ Transfer Line</text>
 
 <text x="40" y="132" font-size="15" font-weight="bold" fill="#333">GC 8890</text>
