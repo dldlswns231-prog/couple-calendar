@@ -213,6 +213,16 @@
         #lightbox.show { display: flex; }
         #lightbox img { max-width: 96vw; max-height: 94vh; background: #fff; border-radius: 8px; }
 
+
+        /* 3장: 기기 구조도 팝업 버튼 */
+        .diagram-btns { display: flex; gap: 6px; flex-shrink: 0; padding-left: 10px; border-left: 1px solid #eee; }
+        .diagram-btn {
+            border: 1px solid #ccc; background: #fff; color: #444; border-radius: 6px; padding: 6px 10px;
+            font-size: 12px; font-family: inherit; cursor: pointer; white-space: nowrap;
+        }
+        .diagram-btn:hover { border-color: #0078d4; color: #0078d4; background: #f0f7ff; }
+        .diagram-btn kbd { font-family: inherit; font-size: 10px; color: #999; margin-left: 4px; }
+
         #page3 .page-inner { padding-top: 20px; }
         @media (max-width: 900px) {
             .cover-wrap { grid-template-columns: 1fr; padding: 24px 20px; }
@@ -305,6 +315,10 @@
                 <div class="nav-item" data-index="13" onclick="loadSlide(13)" title="Agilent Empower: Instrument Configuration"><div class="nav-num">14</div><div class="nav-label">Instrument Config</div></div>
                 <div class="nav-item" data-index="14" onclick="loadSlide(14)" title="Agilent Empower: Options & Preferences"><div class="nav-num">15</div><div class="nav-label">Options/Prefs</div></div>
             </div>
+        <div class="diagram-btns">
+            <button class="diagram-btn" onclick="openDiagram('gc')" title="GC 구조도 띄우기 (단축키 G)">GC 구조도<kbd>G</kbd></button>
+            <button class="diagram-btn" onclick="openDiagram('hs')" title="헤드스페이스 구조도 띄우기 (단축키 H)">HS 구조도<kbd>H</kbd></button>
+        </div>
     </div>
 
     <div class="slide-container">
@@ -441,12 +455,22 @@
         document.getElementById('lightbox-img').src = fig.querySelector('img').src;
         document.getElementById('lightbox').classList.add('show');
     }
+    function openDiagram(kind) {
+        const imgs = document.querySelectorAll('#page2 .diagram-card img');
+        const img = kind === 'gc' ? imgs[1] : imgs[0];
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').classList.add('show');
+    }
     function closeLightbox() { document.getElementById('lightbox').classList.remove('show'); }
 
     document.addEventListener('keydown', (e) => {
         if (document.getElementById('lightbox').classList.contains('show')) {
             if (e.key === 'Escape') closeLightbox();
             return;
+        }
+        if (curPage === 3 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            if (e.key === 'g' || e.key === 'G') { openDiagram('gc'); return; }
+            if (e.key === 'h' || e.key === 'H') { openDiagram('hs'); return; }
         }
         if (e.key === 'PageDown') { showPage(curPage + 1); return; }
         if (e.key === 'PageUp') { showPage(curPage - 1); return; }
