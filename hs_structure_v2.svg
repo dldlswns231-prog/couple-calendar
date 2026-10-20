@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1030" viewBox="0 0 1280 1030" font-family="'WenQuanYi Zen Hei','Malgun Gothic',sans-serif">
+<defs>
+ <marker id="aB" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2b7cd3"/></marker>
+ <marker id="aR" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#d9534f"/></marker>
+</defs>
+<rect width="1280" height="1030" fill="#fff"/>
+<text x="40" y="42" font-size="25" font-weight="bold" fill="#222">Agilent 7697A 헤드스페이스 내부 구조</text>
+<line x1="40" y1="54" x2="500" y2="54" stroke="#d9534f" stroke-width="3"/>
+<g font-size="13" fill="#444">
+ <line x1="40" y1="76" x2="80" y2="76" stroke="#2b7cd3" stroke-width="3" stroke-dasharray="7 4"/><text x="88" y="81">시료 가스 경로 (프로브 → 루프 → Vent)</text>
+ <line x1="330" y1="76" x2="370" y2="76" stroke="#d9534f" stroke-width="3"/><text x="378" y="81">캐리어 가스 경로</text>
+ <line x1="520" y1="76" x2="560" y2="76" stroke="#7b3fb0" stroke-width="5"/><text x="568" y="81">샘플 루프</text>
+ <rect x="670" y="64" width="86" height="22" rx="11" fill="#d9534f"/><text x="713" y="80" fill="#fff" text-anchor="middle" font-size="12">Empower 값</text>
+</g>
+<rect x="830" y="22" width="410" height="52" rx="8" fill="#fff0f0" stroke="#ffcccc"/>
+<text x="1035" y="42" text-anchor="middle" font-size="13" fill="#d9534f" font-weight="bold">온도 순서 (슬라이드 10)</text>
+<text x="1035" y="62" text-anchor="middle" font-size="15" fill="#222">Oven ≤ Loop/Valve ≤ Transfer Line</text>
+
+<text x="40" y="132" font-size="15" font-weight="bold" fill="#333">GC 8890</text>
+<rect x="40" y="140" width="210" height="380" rx="10" fill="#f3f6f9" stroke="#8fa3b5" stroke-width="2.5"/>
+<text x="480" y="132" font-size="15" font-weight="bold" fill="#333">밸브 열 인클로저 (Valve thermal enclosure)</text>
+<rect x="480" y="140" width="290" height="380" rx="10" fill="#f6f2fb" stroke="#b79ad6" stroke-width="2.5"/>
+<rect x="662" y="150" width="98" height="22" rx="11" fill="#d9534f"/><text x="711" y="165" fill="#fff" text-anchor="middle" font-size="12">Loop 105 °C</text>
+<text x="968" y="132" font-size="15" font-weight="bold" fill="#333">바이알 오븐 (Vial oven)</text>
+<rect x="860" y="140" width="380" height="380" rx="10" fill="#fdf6ee" stroke="#e8a33d" stroke-width="2.5"/>
+<rect x="1134" y="150" width="96" height="22" rx="11" fill="#d9534f"/><text x="1182" y="165" fill="#fff" text-anchor="middle" font-size="12">Oven 85 °C</text>
+
+<rect x="70" y="190" width="140" height="140" rx="8" fill="#e6ecf2" stroke="#8fa3b5" stroke-width="2"/>
+<text x="140" y="183" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">주입구 (SSL)</text>
+<rect x="110" y="205" width="32" height="110" rx="4" fill="#fff" stroke="#6f8196" stroke-width="2"/>
+<text x="126" y="262" text-anchor="middle" font-size="11" fill="#445" transform="rotate(-90 126 262)">Liner</text>
+<line x1="126" y1="330" x2="126" y2="400" stroke="#555" stroke-width="3"/>
+<ellipse cx="126" cy="440" rx="42" ry="18" fill="none" stroke="#555" stroke-width="3"/><ellipse cx="126" cy="440" rx="28" ry="11" fill="none" stroke="#555" stroke-width="3"/>
+<text x="126" y="482" text-anchor="middle" font-size="11" fill="#445">컬럼 (GC 오븐) → FID</text>
+<rect x="172" y="352" width="66" height="40" rx="6" fill="#fff" stroke="#8fa3b5" stroke-width="2"/>
+<text x="205" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#445">EPC</text><text x="205" y="385" text-anchor="middle" font-size="10" fill="#667">캐리어</text>
+
+<path d="M620,245 L620,185 L745,185 L745,470 L620,470 L620,415" fill="none" stroke="#7b3fb0" stroke-width="6" stroke-linejoin="round"/>
+<circle cx="640" cy="470" r="13" fill="none" stroke="#7b3fb0" stroke-width="4"/>
+<circle cx="666" cy="470" r="13" fill="none" stroke="#7b3fb0" stroke-width="4"/>
+<circle cx="692" cy="470" r="13" fill="none" stroke="#7b3fb0" stroke-width="4"/>
+<circle cx="718" cy="470" r="13" fill="none" stroke="#7b3fb0" stroke-width="4"/>
+<text x="690" y="502" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a2a73">샘플 루프 (포트 1 ↔ 4)</text>
+<line x1="620.0" y1="383.0" x2="620.0" y2="415.0" stroke="#7b3fb0" stroke-width="3.5"/>
+<line x1="574.1" y1="356.5" x2="546.4" y2="372.5" stroke="#7b3fb0" stroke-width="3.5"/>
+<line x1="574.1" y1="303.5" x2="546.4" y2="287.5" stroke="#7b3fb0" stroke-width="3.5"/>
+<line x1="620.0" y1="277.0" x2="620.0" y2="245.0" stroke="#7b3fb0" stroke-width="3.5"/>
+<line x1="665.9" y1="303.5" x2="693.6" y2="287.5" stroke="#7b3fb0" stroke-width="3.5"/>
+<line x1="665.9" y1="356.5" x2="693.6" y2="372.5" stroke="#7b3fb0" stroke-width="3.5"/>
+<circle cx="620" cy="330" r="55" fill="#ede5f7" stroke="#7b3fb0" stroke-width="3.5"/>
+<text x="620" y="328" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a2a73">6포트</text><text x="620" y="344" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a2a73">밸브</text>
+<circle cx="620.0" cy="366.0" r="10" fill="#7b3fb0"/><text x="620.0" y="370.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">1</text>
+<circle cx="588.8" cy="348.0" r="10" fill="#7b3fb0"/><text x="588.8" y="352.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">2</text>
+<circle cx="588.8" cy="312.0" r="10" fill="#7b3fb0"/><text x="588.8" y="316.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">3</text>
+<circle cx="620.0" cy="294.0" r="10" fill="#7b3fb0"/><text x="620.0" y="298.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">4</text>
+<circle cx="651.2" cy="312.0" r="10" fill="#7b3fb0"/><text x="651.2" y="316.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">5</text>
+<circle cx="651.2" cy="348.0" r="10" fill="#7b3fb0"/><text x="651.2" y="352.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">6</text>
+<path d="M693.6,287.5 L830,287.5 L830,105 L950,105 L950,352" fill="none" stroke="#fff" stroke-width="9"/>
+<path d="M693.6,287.5 L830,287.5 L830,105 L950,105 L950,352" fill="none" stroke="#2b7cd3" stroke-width="3" stroke-dasharray="8 5"/>
+<path d="M693.6,287.5 L790,287.5" stroke="#2b7cd3" stroke-width="3" fill="none" marker-end="url(#aB)" opacity="0"/>
+<path d="M693.6,372.5 L800,372.5 L800,560" fill="none" stroke="#fff" stroke-width="9"/>
+<path d="M693.6,372.5 L800,372.5 L800,560" fill="none" stroke="#2b7cd3" stroke-width="3" stroke-dasharray="8 5" marker-end="url(#aB)"/>
+<text x="800" y="582" text-anchor="middle" font-size="13" font-weight="bold" fill="#2b7cd3">Vent (배기) · 포트 6*</text>
+<line x1="546.4" y1="287.5" x2="210" y2="287.5" stroke="#444" stroke-width="13"/><line x1="546.4" y1="287.5" x2="210" y2="287.5" stroke="#f5b97a" stroke-width="7" stroke-dasharray="3 3"/>
+<line x1="536.4" y1="287.5" x2="150" y2="287.5" stroke="#d9534f" stroke-width="2.5" marker-end="url(#aR)"/>
+<text x="365" y="250" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">트랜스퍼 라인 (포트 3)</text><text x="365" y="268" text-anchor="middle" font-size="11" fill="#555">퓨즈드 실리카 · 가열 이송관</text>
+<rect x="318" y="302" width="94" height="20" rx="10" fill="#d9534f"/><text x="365" y="316" fill="#fff" text-anchor="middle" font-size="11">Transfer 105 °C</text>
+<line x1="238" y1="372.5" x2="538.4" y2="372.5" stroke="#d9534f" stroke-width="3" marker-end="url(#aR)"/>
+<text x="365" y="394.5" text-anchor="middle" font-size="13" font-weight="bold" fill="#d9534f">캐리어 가스 (포트 2*)</text>
+<text x="835" y="98" font-size="13" font-weight="bold" fill="#2b7cd3">샘플 프로브 (포트 5)</text>
+<rect x="890" y="478" width="330" height="16" rx="4" fill="#c9c9c9"/><text x="1055" y="490" font-size="11" fill="#555" text-anchor="middle">12-vial 캐러셀 / 가열 블록</text>
+<rect x="905" y="300" width="90" height="178" rx="10" fill="#fffbea" stroke="#555" stroke-width="2.5"/>
+<rect x="907" y="395" width="86" height="81" rx="8" fill="#bfe3f7"/>
+<g fill="#e8a33d" opacity=".75"><circle cx="925" cy="330" r="3"/><circle cx="950" cy="350" r="3"/><circle cx="970" cy="322" r="3"/><circle cx="940" cy="375" r="3"/><circle cx="975" cy="370" r="3"/></g>
+<rect x="930" y="282" width="40" height="20" fill="#fffbea" stroke="#555" stroke-width="2.5"/><rect x="924" y="272" width="52" height="14" rx="3" fill="#444"/>
+<g opacity=".35"><rect x="1115" y="300" width="90" height="178" rx="10" fill="#fffbea" stroke="#555" stroke-width="2.5"/><rect x="1117" y="410" width="86" height="66" rx="8" fill="#bfe3f7"/><rect x="1140" y="282" width="40" height="20" fill="#fffbea" stroke="#555" stroke-width="2.5"/><rect x="1134" y="272" width="52" height="14" rx="3" fill="#444"/></g>
+<rect x="947.5" y="140" width="5" height="212" fill="#666"/><polygon points="947.5,352 952.5,352 950,362" fill="#666"/>
+<text x="1002" y="335" font-size="13" fill="#9a6a10" font-weight="bold">헤드스페이스</text><text x="1002" y="351" font-size="13" fill="#9a6a10" font-weight="bold">(기체)</text>
+<text x="1002" y="440" font-size="13" fill="#1d6fa5" font-weight="bold">시료 (액체)</text>
+<text x="1002" y="220" font-size="12" fill="#555">회전식 캐러셀 · 진탕 지원</text>
+<text x="1002" y="262" font-size="11" fill="#666">프로브 끝 = 기체 영역</text>
+<path d="M880,504 L890,514 L900,504 L910,514 L920,504 L930,514 L940,504 L950,514 L960,504 L970,514 L980,504 L990,514 L1000,504 L1010,514" fill="none" stroke="#e4572e" stroke-width="2"/><text x="1028" y="513" font-size="11" fill="#c0391b">오븐 리본 히터</text>
+<text x="250" y="654" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">③ 루프 채움 위치 (Load)</text>
+<circle cx="250" cy="800" r="48" fill="#f7f4fb" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="250.0" y1="848.0" x2="250.0" y2="872.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="208.4" y1="824.0" x2="187.6" y2="836.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="208.4" y1="776.0" x2="187.6" y2="764.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="250.0" y1="752.0" x2="250.0" y2="728.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="291.6" y1="776.0" x2="312.4" y2="764.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="291.6" y1="824.0" x2="312.4" y2="836.0" stroke="#7b3fb0" stroke-width="3"/>
+<path d="M276.0,785.0 A30,30 0 0 0 250.0,770.0" fill="none" stroke="#2b7cd3" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 4"/>
+<path d="M250.0,830.0 A30,30 0 0 0 276.0,815.0" fill="none" stroke="#2b7cd3" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 4"/>
+<path d="M224.0,815.0 A30,30 0 0 1 224.0,785.0" fill="none" stroke="#d9534f" stroke-width="5" stroke-linecap="round"/>
+<circle cx="250.0" cy="888.0" r="9" fill="#7b3fb0"/><text x="250.0" y="892.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">1</text>
+<text x="250.0" y="926.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b3fb0">루프</text>
+<circle cx="173.8" cy="844.0" r="9" fill="#7b3fb0"/><text x="173.8" y="848.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">2</text>
+<text x="147.0" y="860.0" text-anchor="end" font-size="12" font-weight="bold" fill="#d9534f">캐리어</text>
+<circle cx="173.8" cy="756.0" r="9" fill="#7b3fb0"/><text x="173.8" y="760.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">3</text>
+<text x="147.0" y="748.0" text-anchor="end" font-size="12" font-weight="bold" fill="#d9534f">→ GC</text>
+<circle cx="250.0" cy="712.0" r="9" fill="#7b3fb0"/><text x="250.0" y="716.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">4</text>
+<text x="250.0" y="686.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b3fb0">루프</text>
+<circle cx="326.2" cy="756.0" r="9" fill="#7b3fb0"/><text x="326.2" y="760.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">5</text>
+<text x="353.0" y="748.0" text-anchor="start" font-size="12" font-weight="bold" fill="#2b7cd3">프로브</text>
+<circle cx="326.2" cy="844.0" r="9" fill="#7b3fb0"/><text x="326.2" y="848.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">6</text>
+<text x="353.0" y="860.0" text-anchor="start" font-size="12" font-weight="bold" fill="#2b7cd3">Vent</text>
+<text x="250" y="960" text-anchor="middle" font-size="12" fill="#444">프로브(5)→루프(4→1)→Vent(6)</text>
+<text x="250" y="977" text-anchor="middle" font-size="12" fill="#444">캐리어(2)는 루프를 거치지 않고 GC(3)로 직행</text>
+<text x="620" y="654" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">④ 주입 위치 (Inject)</text>
+<circle cx="620" cy="800" r="48" fill="#f7f4fb" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="620.0" y1="848.0" x2="620.0" y2="872.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="578.4" y1="824.0" x2="557.6" y2="836.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="578.4" y1="776.0" x2="557.6" y2="764.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="620.0" y1="752.0" x2="620.0" y2="728.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="661.6" y1="776.0" x2="682.4" y2="764.0" stroke="#7b3fb0" stroke-width="3"/>
+<line x1="661.6" y1="824.0" x2="682.4" y2="836.0" stroke="#7b3fb0" stroke-width="3"/>
+<path d="M594.0,815.0 A30,30 0 0 0 620.0,830.0" fill="none" stroke="#d9534f" stroke-width="5" stroke-linecap="round"/>
+<path d="M620.0,770.0 A30,30 0 0 0 594.0,785.0" fill="none" stroke="#d9534f" stroke-width="5" stroke-linecap="round"/>
+<path d="M646.0,785.0 A30,30 0 0 1 646.0,815.0" fill="none" stroke="#2b7cd3" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 4"/>
+<circle cx="620.0" cy="888.0" r="9" fill="#7b3fb0"/><text x="620.0" y="892.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">1</text>
+<text x="620.0" y="926.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b3fb0">루프</text>
+<circle cx="543.8" cy="844.0" r="9" fill="#7b3fb0"/><text x="543.8" y="848.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">2</text>
+<text x="517.0" y="860.0" text-anchor="end" font-size="12" font-weight="bold" fill="#d9534f">캐리어</text>
+<circle cx="543.8" cy="756.0" r="9" fill="#7b3fb0"/><text x="543.8" y="760.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">3</text>
+<text x="517.0" y="748.0" text-anchor="end" font-size="12" font-weight="bold" fill="#d9534f">→ GC</text>
+<circle cx="620.0" cy="712.0" r="9" fill="#7b3fb0"/><text x="620.0" y="716.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">4</text>
+<text x="620.0" y="686.0" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b3fb0">루프</text>
+<circle cx="696.2" cy="756.0" r="9" fill="#7b3fb0"/><text x="696.2" y="760.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">5</text>
+<text x="723.0" y="748.0" text-anchor="start" font-size="12" font-weight="bold" fill="#2b7cd3">프로브</text>
+<circle cx="696.2" cy="844.0" r="9" fill="#7b3fb0"/><text x="696.2" y="848.0" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">6</text>
+<text x="723.0" y="860.0" text-anchor="start" font-size="12" font-weight="bold" fill="#2b7cd3">Vent</text>
+<text x="620" y="960" text-anchor="middle" font-size="12" fill="#444">캐리어(2)→루프(1→4)→트랜스퍼 라인(3)</text>
+<text x="620" y="977" text-anchor="middle" font-size="12" fill="#444">루프 내용물이 GC 주입구로 밀려감</text>
+<text x="435" y="805" text-anchor="middle" font-size="22" fill="#7b3fb0">⇄</text><text x="435" y="823" text-anchor="middle" font-size="11" fill="#7b3fb0">로터 회전</text>
+<rect x="860" y="650" width="380" height="64" rx="8" fill="#fff" stroke="#e8a33d" stroke-width="1.5"/><circle cx="882" cy="672" r="12" fill="#e8a33d"/><text x="882" y="677" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">1</text><text x="902" y="677" font-size="14" font-weight="bold" fill="#222">바이알 평형</text><text x="874" y="696" font-size="12" fill="#444">오븐 85 °C 가열·진탕 → 액체 ⇄ 기체 평형</text><text x="874" y="710" font-size="11" fill="#d9534f">Empower: Times / Temperatures</text>
+<rect x="860" y="724" width="380" height="64" rx="8" fill="#fff" stroke="#2b7cd3" stroke-width="1.5"/><circle cx="882" cy="746" r="12" fill="#2b7cd3"/><text x="882" y="751" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">2</text><text x="902" y="751" font-size="14" font-weight="bold" fill="#222">가압</text><text x="874" y="770" font-size="12" fill="#444">프로브가 바이알을 뚫고 캐리어로 가압</text><text x="874" y="784" font-size="11" fill="#d9534f">Empower: Vial Settings &amp; Fill</text>
+<rect x="860" y="798" width="380" height="64" rx="8" fill="#fff" stroke="#2b7cd3" stroke-width="1.5"/><circle cx="882" cy="820" r="12" fill="#2b7cd3"/><text x="882" y="825" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">3</text><text x="902" y="825" font-size="14" font-weight="bold" fill="#222">루프 채움</text><text x="874" y="844" font-size="12" fill="#444">헤드스페이스 가스가 프로브(5)→루프로, 잔여는 Vent</text><text x="874" y="858" font-size="11" fill="#d9534f">Empower: Loop 온도 / Venting</text>
+<rect x="860" y="872" width="380" height="64" rx="8" fill="#fff" stroke="#d9534f" stroke-width="1.5"/><circle cx="882" cy="894" r="12" fill="#d9534f"/><text x="882" y="899" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">4</text><text x="902" y="899" font-size="14" font-weight="bold" fill="#222">주입</text><text x="874" y="918" font-size="12" fill="#444">밸브 전환 → 캐리어가 루프를 밀어 GC로 (Injection 1분)</text><text x="874" y="932" font-size="11" fill="#d9534f">Empower: Carrier Control / Times</text>
+<text x="40" y="1002" font-size="11" fill="#666">근거: Agilent 7697A Maintenance 매뉴얼(G4556-90017) Fig. 4, 15, 23, 27–29, 33, 35, 38 및 p.36, 62 — 6포트 밸브 번호, 루프(포트 1·4), 프로브(포트 5), 트랜스퍼 라인(포트 3), 오븐·캐러셀·리본 히터·밸브 열 인클로저 구성.</text>
+<text x="40" y="1018" font-size="11" fill="#666">* 캐리어(포트 2)와 Vent(포트 6)의 연결은 매뉴얼에 명시되지 않아, 밸브 동작 원리(인접 포트 쌍 연결)에 맞춰 추정한 것입니다. 개념도이므로 실제 배관 길이·배치와는 다릅니다.</text>
+</svg>
