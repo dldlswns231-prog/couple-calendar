@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860" font-family="'WenQuanYi Zen Hei','Malgun Gothic',sans-serif">
+<defs>
+ <marker id="aB" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L11,5.5 L0,11 z" fill="#2b7cd3"/></marker>
+ <marker id="aR" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L11,5.5 L0,11 z" fill="#d9534f"/></marker>
+ <radialGradient id="fl" cx="50%" cy="75%" r="60%"><stop offset="0" stop-color="#fff2a8"/><stop offset=".5" stop-color="#ffb347"/><stop offset="1" stop-color="#e4572e"/></radialGradient>
+</defs>
+<rect width="1280" height="860" fill="#fff"/>
+<text x="40" y="42" font-size="25" font-weight="bold" fill="#222">Agilent 8890 GC 내부 구조 (Inlet · Oven · Outlet)</text>
+<line x1="40" y1="54" x2="640" y2="54" stroke="#d9534f" stroke-width="3"/>
+<g font-size="13" fill="#444">
+ <line x1="40" y1="76" x2="80" y2="76" stroke="#b5651d" stroke-width="3"/><text x="88" y="81">컬럼 (시료가 지나가는 길)</text>
+ <line x1="300" y1="76" x2="340" y2="76" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/><text x="352" y="81">가스 흐름</text>
+ <rect x="460" y="64" width="86" height="22" rx="11" fill="#d9534f"/><text x="503" y="80" fill="#fff" text-anchor="middle" font-size="12">Empower 값</text>
+</g>
+
+<text x="60" y="428" font-size="0"> </text>
+<rect x="60" y="400" width="1160" height="410" rx="10" fill="#f4f8fd" stroke="#2b7cd3" stroke-width="2.5"/>
+<text x="76" y="426" font-size="15" font-weight="bold" fill="#333">OVEN (슬라이드 2~5)</text>
+<rect x="290" y="438" width="200" height="22" rx="11" fill="#d9534f"/><text x="390" y="453" fill="#fff" text-anchor="middle" font-size="12">40 °C → 10 °C/min → 240 °C</text>
+<rect x="498" y="438" width="120" height="22" rx="11" fill="#d9534f"/><text x="558" y="453" fill="#fff" text-anchor="middle" font-size="12">Max Oven 280 °C</text>
+
+<circle cx="640" cy="610" r="100" fill="none" stroke="#b5651d" stroke-width="3"/>
+<circle cx="640" cy="610" r="108" fill="none" stroke="#b5651d" stroke-width="3"/>
+<circle cx="640" cy="610" r="116" fill="none" stroke="#b5651d" stroke-width="3"/>
+<circle cx="640" cy="610" r="124" fill="none" stroke="#b5651d" stroke-width="3"/>
+<circle cx="640" cy="610" r="86" fill="#fff" stroke="#2b7cd3" stroke-width="2.5"/>
+<circle cx="640.0" cy="610.0" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="674.0" cy="610.0" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="657.0" cy="639.4" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="623.0" cy="639.4" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="606.0" cy="610.0" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="623.0" cy="580.6" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<circle cx="657.0" cy="580.6" r="11" fill="#e9f1fb" stroke="#2b7cd3" stroke-width="2"/>
+<text x="640" y="754" text-anchor="middle" font-size="13" font-weight="bold" fill="#2b6fb0">오븐 팬 (중앙) · 컬럼 코일이 팬을 둘러쌈</text>
+<text x="640" y="772" text-anchor="middle" font-size="12" fill="#555">컬럼 30 m × 320 µm × 1.8 µm</text>
+<rect x="458" y="494" width="24" height="12" rx="3" fill="#aab2ba" transform="rotate(45 470 500)"/>
+<rect x="778" y="494" width="24" height="12" rx="3" fill="#aab2ba" transform="rotate(45 790 500)"/>
+<rect x="458" y="744" width="24" height="12" rx="3" fill="#aab2ba" transform="rotate(45 470 750)"/>
+<rect x="778" y="744" width="24" height="12" rx="3" fill="#aab2ba" transform="rotate(45 790 750)"/>
+<text x="810" y="510" font-size="11" fill="#666">컬럼 클립 (모서리 4곳)</text>
+<text x="76" y="720" font-size="11" fill="#666">오븐 공기가 팬으로 순환 → 컬럼을 고르게 가열</text><text x="76" y="736" font-size="11" fill="#666">(Equilibration Time 동안 초기 온도 안정화)</text>
+<path d="M270,400 L270,480 C270,570 420,610 516,610" fill="none" stroke="#b5651d" stroke-width="3.5"/>
+<path d="M764,610 C860,610 950,570 950,480 L950,400" fill="none" stroke="#b5651d" stroke-width="3.5"/>
+<text x="316" y="142" font-size="15" font-weight="bold" fill="#333">INLET · Back SSL 주입구 (슬라이드 1)</text>
+<rect x="215" y="205" width="110" height="125" rx="6" fill="#fff3e8" stroke="#e8a33d" stroke-width="2.5"/>
+<rect x="328" y="212" width="98" height="22" rx="11" fill="#d9534f"/><text x="377" y="227" fill="#fff" text-anchor="middle" font-size="12">Heater 140 °C</text>
+<rect x="215" y="340" width="110" height="58" rx="4" fill="#ececec" stroke="#b8b8b8" stroke-width="1.5"/>
+<!-- HS transfer line -->
+<line x1="270" y1="92" x2="270" y2="172" stroke="#444" stroke-width="12"/><line x1="270" y1="92" x2="270" y2="172" stroke="#f5b97a" stroke-width="6" stroke-dasharray="3 3"/>
+<line x1="270" y1="172" x2="270" y2="250" stroke="#d9534f" stroke-width="2.5"/>
+<text x="286" y="106" font-size="12" fill="#444" font-weight="bold">7697A 트랜스퍼 라인</text>
+<text x="286" y="121" font-size="11" fill="#666">septum nut + strain relief로 고정, 끝은 liner 안 (7697A 매뉴얼 p.50)</text>
+<!-- parts -->
+<rect x="240" y="150" width="60" height="22" rx="4" fill="#9aa5b1" stroke="#6f7b88" stroke-width="2"/>
+<rect x="248" y="172" width="44" height="8" fill="#333"/>
+<rect x="235" y="180" width="70" height="25" rx="3" fill="#d7dde3" stroke="#8a97a3" stroke-width="2"/>
+<ellipse cx="270" cy="208" rx="16" ry="3" fill="none" stroke="#333" stroke-width="2"/>
+<rect x="255" y="210" width="30" height="112" rx="4" fill="#fff" stroke="#6f8196" stroke-width="2.5"/>
+<ellipse cx="270" cy="334" rx="17" ry="5" fill="#e0b341" stroke="#a37d12" stroke-width="2"/>
+<rect x="257" y="342" width="26" height="30" fill="#c9ced3" stroke="#8a97a3" stroke-width="2"/>
+<rect x="263" y="376" width="14" height="24" fill="#b0b6bc" stroke="#7d848b" stroke-width="2"/>
+<!-- labels right -->
+<g font-size="11" fill="#445">
+ <text x="340" y="164">Septum retainer nut · Septum</text>
+ <text x="340" y="196">Insert assembly (septum seat)</text>
+ <text x="340" y="262">Liner (기화실, O-ring 밀봉)</text>
+ <text x="340" y="347">Gold seal · Retaining nut</text>
+ <text x="340" y="362">Reducing nut · 단열재(Insulation cup)</text>
+ <text x="340" y="392">Ferrule · Column nut → 컬럼 연결</text>
+</g>
+<!-- gases -->
+<path d="M235,194 L40,194" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<text x="40" y="184" font-size="12" fill="#2b7cd3" font-weight="bold">Septum purge 배기 (2~5 mL/min)</text>
+<path d="M40,262 L215,262" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<text x="40" y="252" font-size="12" fill="#2b7cd3" font-weight="bold">캐리어 가스 (EPC 압력/유량)</text>
+<path d="M325,300 L560,300" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<text x="470" y="292" font-size="12" fill="#2b7cd3" font-weight="bold">Split vent line → Split vent trap</text>
+<rect x="470" y="308" width="70" height="20" rx="10" fill="#d9534f"/><text x="505" y="322" fill="#fff" text-anchor="middle" font-size="11">Split 5:1</text>
+
+<text x="640" y="122" font-size="15" font-weight="bold" fill="#333">OUTLET · Front FID 검출기 (슬라이드 6)</text>
+<rect x="880" y="330" width="140" height="68" rx="6" fill="#e6ecf2" stroke="#8fa3b5" stroke-width="2.5"/>
+<rect x="888" y="338" width="100" height="22" rx="11" fill="#d9534f"/><text x="938" y="353" fill="#fff" text-anchor="middle" font-size="12">Heater 250 °C</text>
+<rect x="942" y="262" width="16" height="68" fill="#fff" stroke="#6f8196" stroke-width="2.5"/>
+<ellipse cx="950" cy="334" rx="22" ry="4" fill="none" stroke="#333" stroke-width="2"/>
+<rect x="905" y="180" width="90" height="82" rx="6" fill="#f2d98a" stroke="#a37d12" stroke-width="2.5"/>
+<rect x="925" y="192" width="50" height="62" fill="#fff" stroke="#2b7cd3" stroke-width="3"/>
+<ellipse cx="950" cy="244" rx="12" ry="22" fill="url(#fl)"/>
+<rect x="935" y="170" width="30" height="14" rx="3" fill="#9aa5b1" stroke="#6f7b88" stroke-width="2"/>
+<rect x="940" y="135" width="20" height="38" rx="3" fill="#fff" stroke="#999" stroke-width="2"/>
+<rect x="995" y="224" width="40" height="12" rx="3" fill="#d96a2b" stroke="#8a3b0f" stroke-width="1.5"/>
+<rect x="942" y="380" width="16" height="20" fill="#b0b6bc" stroke="#7d848b" stroke-width="2"/>
+<g font-size="11" fill="#445" text-anchor="end">
+ <text x="896" y="152">PTFE chimney (옵션)</text>
+ <text x="896" y="225">Collector assembly (수집 전극)</text>
+ <text x="935" y="300">Jet</text>
+ <text x="870" y="352">Mounting pallet</text>
+ <text x="870" y="392">Ferrule · Column nut</text>
+</g>
+<text x="1042" y="238" font-size="11" fill="#8a3b0f">Ignitor (점화 글로우 플러그)</text>
+<text x="975" y="274" font-size="11" fill="#b8651a" font-weight="bold">수소 불꽃</text>
+<path d="M975,205 L1190,205" fill="none" stroke="#d9534f" stroke-width="2.5" marker-end="url(#aR)"/>
+<text x="1180" y="196" text-anchor="end" font-size="12" fill="#d9534f" font-weight="bold">신호 → Empower (20 Hz)</text>
+<path d="M950,130 L950,100" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/><text x="962" y="108" font-size="11" fill="#2b7cd3" font-weight="bold">배기</text>
+<path d="M1130,346 L1022,346" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<path d="M1130,364 L1022,364" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<path d="M1130,382 L1022,382" fill="none" stroke="#2b7cd3" stroke-width="3" marker-end="url(#aB)"/>
+<g font-size="11" font-weight="bold" fill="#2b7cd3"><text x="1140" y="350">Air</text><text x="1140" y="368">H2 연료</text><text x="1140" y="386">Makeup N2</text></g>
+<g font-size="11" fill="#d9534f"><text x="1205" y="350">400 mL/min</text><text x="1205" y="368">40 mL/min</text><text x="1205" y="386">25 mL/min</text></g>
+
+<text x="40" y="832" font-size="11" fill="#666">근거: Agilent 8890 정비 매뉴얼(G3540-90015) Fig. 20 SSL 주입구 분해도, Fig. 40–42 FID 분해도, p.32–33 오븐(중앙 팬·컬럼 행어/클립), p.55–56 컬럼 설치. 트랜스퍼 라인 연결은 7697A 정비 매뉴얼(G4556-90017) p.50.</text>
+<text x="40" y="848" font-size="11" fill="#666">부품 이름·배치는 매뉴얼 분해도 기준이며, 가스 배관(EPC·퍼지 라인 위치)과 크기는 단순화한 개념도입니다. Empower 값은 gc_headspace.html의 현재 설정입니다.</text>
+</svg>
