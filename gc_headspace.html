@@ -227,6 +227,24 @@
         .diagram-btn.hs:hover { background: #c0392f; }
         .diagram-btn kbd { font-family: inherit; font-size: 10px; opacity: .75; margin-left: 4px; }
 
+
+        /* 발표용 레이저 포인터 (L 키 또는 상단 버튼) */
+        .laser-btn { border: 1px solid #ccc; background: #fff; color: #555; border-radius: 6px; padding: 7px 12px;
+            font-size: 12px; font-family: inherit; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+        .laser-btn:hover { border-color: #d9534f; color: #d9534f; }
+        .laser-btn.on { background: #ff3b30; border-color: #ff3b30; color: #fff; font-weight: bold; }
+        .laser-btn kbd { font-family: inherit; font-size: 10px; opacity: .7; margin-left: 4px; }
+        body.laser, body.laser * { cursor: none !important; }
+        #laser {
+            position: fixed; left: 0; top: 0; width: 30px; height: 30px; border-radius: 50%;
+            pointer-events: none; z-index: 1000; display: none;
+            background: radial-gradient(circle, #ff3b30 0 28%, rgba(255,59,48,0.55) 45%, rgba(255,59,48,0) 70%);
+            box-shadow: 0 0 14px 4px rgba(255,59,48,0.45);
+            transition: width .08s, height .08s;
+        }
+        body.laser #laser.show { display: block; }
+        #laser.down { width: 52px; height: 52px; }
+
         #page3 .page-inner { padding-top: 20px; }
         @media (max-width: 900px) {
             .cover-wrap { grid-template-columns: 1fr; padding: 24px 20px; }
@@ -245,6 +263,7 @@
         <button class="diagram-btn gc" onclick="openDiagram('gc')" title="GC 구조도 띄우기 (단축키 G)">GC 구조도<kbd>G</kbd></button>
         <button class="diagram-btn hs" onclick="openDiagram('hs')" title="헤드스페이스 구조도 띄우기 (단축키 H)">HS 구조도<kbd>H</kbd></button>
     </div>
+    <button class="laser-btn" id="laser-btn" onclick="toggleLaser()" title="레이저 포인터 켜기/끄기 (단축키 L)">레이저 포인터<kbd>L</kbd></button>
     <div class="top-tabs">
         <button class="top-tab" data-page="1" onclick="showPage(1)">1 표지</button>
         <button class="top-tab" data-page="2" onclick="showPage(2)">2 기기 구조</button>
@@ -361,6 +380,8 @@
   </div>
 </section>
 
+<div id="laser"></div>
+
 <div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" alt=""></div>
 
 <script>
@@ -468,7 +489,27 @@
     }
     function closeLightbox() { document.getElementById('lightbox').classList.remove('show'); }
 
+    /* ---- 레이저 포인터 ---- */
+    let laserOn = false;
+    function toggleLaser() {
+        laserOn = !laserOn;
+        document.body.classList.toggle('laser', laserOn);
+        document.getElementById('laser-btn').classList.toggle('on', laserOn);
+        if (!laserOn) document.getElementById('laser').classList.remove('show');
+    }
+    document.addEventListener('mousemove', (e) => {
+        if (!laserOn) return;
+        const el = document.getElementById('laser');
+        el.classList.add('show');
+        el.style.transform = 'translate(' + (e.clientX - 15) + 'px,' + (e.clientY - 15) + 'px)';
+        if (el.classList.contains('down')) el.style.transform = 'translate(' + (e.clientX - 26) + 'px,' + (e.clientY - 26) + 'px)';
+    });
+    document.addEventListener('mousedown', () => { document.getElementById('laser').classList.add('down'); });
+    document.addEventListener('mouseup', () => { document.getElementById('laser').classList.remove('down'); });
+    document.documentElement.addEventListener('mouseleave', () => { document.getElementById('laser').classList.remove('show'); });
+
     document.addEventListener('keydown', (e) => {
+        if ((e.key === 'l' || e.key === 'L') && !e.ctrlKey && !e.metaKey && !e.altKey) { toggleLaser(); return; }
         if (document.getElementById('lightbox').classList.contains('show')) {
             if (e.key === 'Escape') closeLightbox();
             return;
